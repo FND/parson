@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Parson</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+ul,
+li {
+	margin: 0;
+}
+
+/* ---- */
+
+body {
+	font-family: sans-serif;
+	line-height: 1.5;
+}
+
+header {
+	margin-bottom: 0.5em;
+}
+
+ul {
+	padding-left: 1em;
+}
+
+form > * {
+	display: block;
+	margin-bottom: 0.5em;
+}
+
+label b {
+	display: block;
+}
+
+/* ---- */
+
+main {
+	display: flex;
+	width: 100vw;
+	height: 100vh;
+	overflow-x: scroll;
+	scroll-behavior: smooth;
+	scroll-snap-type: x mandatory;
+	-webkit-overflow-scrolling: touch;
+}
+
+main > * {
+	height: 100%;
+	padding: 1rem;
+	scroll-snap-align: start;
+}
+main > *:not(:first-of-type) {
+	flex: 0 0 100%;
+}
+
+article {
+	border: 1px solid #82B366;
+	border-width: 0 1px;
+	background-color: #D5E8D4;
+}
+article:nth-of-type(3n+1) {
+	border-color: #9673A6;
+	background-color: #E1D5E7;
+}
+article:nth-of-type(3n+2) {
+	border-color: #6C8EBF;
+	background-color: #DAE8FC;
+}
+article:first-of-type {
+	border: none;
+	background-color: #EEE;
+}
+
+@media(min-width: 40rem) {
+	html {
+		background-color: #EEE;
+		/* cf. https://css-tricks.com/uniqlo-stripe-hovers */
+		background-image: linear-gradient(
+			135deg,
+			rgba(51, 51, 51, 0.04) 20%,
+			transparent 20%,
+			transparent 50%,
+			rgba(51, 51, 51, 0.04) 50%,
+			rgba(51, 51, 51, 0.04) 70%,
+			transparent 70%,
+			transparent
+		);
+		background-size: 20px 20px;
+	}
+
+	main {
+		max-width: 40rem;
+		margin: 0 auto;
+		border: 1px solid #AAA;
+		border-width: 0 1px;
+	}
+}
+	</style>
+</head>
+
+<body>
+	<main>
+		<article id="about">
+			<header>
+				<h1>Parson</h1>
+				<p>simple lists</p>
+			</header>
+			<ul>
+				<li>
+					<a href="#list-home">home</a>
+				</li>
+				<li>
+					<a href="#list-tv">TV</a>
+				</li>
+				<li>
+					<a href="#config">settings</a>
+				</li>
+			</ul>
+		</article>
+
+		<article id="list-home">
+			<h2>home</h2>
+			<ul>
+				<li>chores</li>
+			</ul>
+		</article>
+
+		<article id="list-tv">
+			<h2>TV</h2>
+			<ul>
+				<li>The West Wing</li>
+				<li>Stargate SG-1</li>
+				<li>Scrubs</li>
+			</ul>
+		</article>
+
+		<article id="config">
+			<h2>Settings</h2>
+			<form>
+				<label>
+					<b>title</b>
+					<input value="Parson">
+				</label>
+				<label>
+					<b>tagline</b>
+					<input value="simple lists">
+				</label>
+				<button>save</button>
+			</form>
+		</article>
+	</main>
+</body>
+
+</html>
