@@ -5,7 +5,10 @@
 	<meta charset="utf-8">
 	<title>Parson</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="dist/bundle.css">
 	<style>
+/* reset */
+
 *,
 *::before,
 *::after {
@@ -20,7 +23,7 @@ li {
 	margin: 0;
 }
 
-/* ---- */
+/* generic */
 
 body {
 	font-family: sans-serif;
@@ -35,16 +38,16 @@ ul {
 	padding-left: 1em;
 }
 
+a {
+	text-decoration-skip-ink: auto;
+}
+
 form > * {
 	display: block;
 	margin-bottom: 0.5em;
 }
 
-label b {
-	display: block;
-}
-
-/* ---- */
+/* layout */
 
 main {
 	display: flex;
@@ -58,27 +61,24 @@ main {
 
 main > * {
 	height: 100%;
+	border: 1px solid #82B366;
+	border-width: 0 1px;
 	padding: 1rem;
+	background-color: #D5E8D4;
 	scroll-snap-align: start;
 }
 main > *:not(:first-of-type) {
 	flex: 0 0 100%;
 }
-
-article {
-	border: 1px solid #82B366;
-	border-width: 0 1px;
-	background-color: #D5E8D4;
-}
-article:nth-of-type(3n+1) {
+main > :nth-of-type(3n+1) {
 	border-color: #9673A6;
 	background-color: #E1D5E7;
 }
-article:nth-of-type(3n+2) {
+main > :nth-of-type(3n+2) {
 	border-color: #6C8EBF;
 	background-color: #DAE8FC;
 }
-article:first-of-type {
+main > :first-of-type {
 	border: none;
 	background-color: #EEE;
 }
@@ -111,56 +111,9 @@ article:first-of-type {
 </head>
 
 <body>
-	<main>
-		<article id="about">
-			<header>
-				<h1>Parson</h1>
-				<p>simple lists</p>
-			</header>
-			<ul>
-				<li>
-					<a href="#list-home">home</a>
-				</li>
-				<li>
-					<a href="#list-tv">TV</a>
-				</li>
-				<li>
-					<a href="#config">settings</a>
-				</li>
-			</ul>
-		</article>
+	<main id="app" data-url="data.json"></main>
 
-		<article id="list-home">
-			<h2>home</h2>
-			<ul>
-				<li>chores</li>
-			</ul>
-		</article>
-
-		<article id="list-tv">
-			<h2>TV</h2>
-			<ul>
-				<li>The West Wing</li>
-				<li>Stargate SG-1</li>
-				<li>Scrubs</li>
-			</ul>
-		</article>
-
-		<article id="config">
-			<h2>Settings</h2>
-			<form>
-				<label>
-					<b>title</b>
-					<input value="Parson">
-				</label>
-				<label>
-					<b>tagline</b>
-					<input value="simple lists">
-				</label>
-				<button>save</button>
-			</form>
-		</article>
-	</main>
+	<script src="dist/bundle.js"></script>
 </body>
 
 </html>

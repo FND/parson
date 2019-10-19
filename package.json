@@ -15,10 +15,17 @@
 	"type": "module",
 	"main": "src/index.js",
 	"scripts": {
-		"test": "eslint --cache *.js src && echo ✓"
+		"start": "npm run compile -- --watch",
+		"test": "eslint --cache *.js src && echo ✓",
+		"compile": "rollup -c"
 	},
 	"dependencies": {},
 	"devDependencies": {
-		"eslint-config-fnd": "^1.8.0"
+		"eslint-config-fnd": "^1.8.0",
+		"rollup": "^1.26.3",
+		"rollup-plugin-node-resolve": "^5.2.0",
+		"rollup-plugin-svelte": "^5.1.1",
+		"rollup-plugin-terser": "^5.1.2",
+		"svelte": "^3.12.1"
 	}
 }

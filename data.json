@@ -1,0 +1,13 @@
+{
+	"lists": [{
+		"title": "home",
+		"items": [{ "caption": "chores" }]
+	}, {
+		"title": "TV",
+		"items": [
+			{ "caption": "The West Wing" },
+			{ "caption": "Stargate SG-1", "done": true },
+			{ "caption": "Scrubs" }
+		]
+	}]
+}
