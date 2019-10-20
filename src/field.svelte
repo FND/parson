@@ -11,5 +11,5 @@ b {
 
 <label>
 	<b>{caption}</b>
-	<input value={value}>
+	<input bind:value={value} on:change>
 </label>

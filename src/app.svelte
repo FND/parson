@@ -10,12 +10,23 @@ import { onMount } from "svelte";
 let HOME_ID = "panel-about";
 let CONFIG = { id: "panel-config", title: "Settings" };
 
-let title = "Parson";
-let tagline = "simple lists";
+let metadata = {
+	title: "Parson", // TODO: update `document.title` on change
+	tagline: "simple lists"
+};
 let lists = [];
 $: lists = lists.map(list => Object.assign({}, list, {
 	id: `list-${idify(list.title)}`
 }));
+
+let updater = field => {
+	if(!(field in metadata)) {
+		throw new Error(`invalid field: \`${field}\``);
+	}
+	return ev => {
+		metadata[field] = ev.target.value;
+	};
+};
 
 let ref; // XXX: dummy node is hacky
 onMount(async () => {
@@ -25,6 +36,12 @@ onMount(async () => {
 	let uri = container.getAttribute("data-url");
 	let res = await httpRequest("GET", uri, null, null, { strict: true });
 	res = await res.json();
+	Object.keys(metadata).forEach(field => {
+		let value = res[field];
+		if(value !== undefined) {
+			metadata[field] = value;
+		}
+	});
 	lists = res.lists;
 });
 </script>
@@ -33,8 +50,8 @@ onMount(async () => {
 
 <Panel id={HOME_ID}>
 	<header>
-		<h1>{title}</h1>
-		<p>{tagline}</p>
+		<h1>{metadata.title}</h1>
+		<p>{metadata.tagline}</p>
 	</header>
 	<ToC entries={lists.concat(CONFIG).
 		map(({ id, title }) => ({ id, caption: title }))} />
@@ -49,8 +66,8 @@ onMount(async () => {
 <Panel id={CONFIG.id}>
 	<h2>{CONFIG.title}</h2>
 	<form>
-		<Field caption="title" value={title} />
-		<Field caption="tagline" value={tagline} />
-		<button type="button">save</button>
+		{#each ["title", "tagline"] as field}
+		<Field caption={field} value={metadata[field]} on:change={updater(field)} />
+		{/each}
 	</form>
 </Panel>
