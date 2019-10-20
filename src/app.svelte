@@ -3,28 +3,31 @@ import ToC from "./toc.svelte";
 import List from "./list.svelte";
 import Panel from "./panel.svelte";
 import Field from "./field.svelte";
+import Store from "./models/store";
 import httpRequest from "./util/http";
-import { idify } from "./util";
 import { onMount } from "svelte";
 
 let HOME_ID = "panel-about";
 let CONFIG = { id: "panel-config", title: "Settings" };
 
+let store;
 let metadata = {
 	title: "Parson", // TODO: update `document.title` on change
 	tagline: "simple lists"
 };
 let lists = [];
-$: lists = lists.map(list => Object.assign({}, list, {
-	id: `list-${idify(list.title)}`
-}));
+
+let onChange = ev => {
+	console.log("[STORE] updated", store, JSON.stringify(store));
+};
 
 let updater = field => {
 	if(!(field in metadata)) {
 		throw new Error(`invalid field: \`${field}\``);
 	}
 	return ev => {
-		metadata[field] = ev.target.value;
+		store[field] = metadata[field] = ev.target.value; // XXX: redundancy smell
+		onChange(); // XXX: excessive reuse?
 	};
 };
 
@@ -36,13 +39,14 @@ onMount(async () => {
 	let uri = container.getAttribute("data-url");
 	let res = await httpRequest("GET", uri, null, null, { strict: true });
 	res = await res.json();
+	store = new Store(res);
 	Object.keys(metadata).forEach(field => {
-		let value = res[field];
+		let value = store[field];
 		if(value !== undefined) {
 			metadata[field] = value;
 		}
 	});
-	lists = res.lists;
+	lists = store.lists;
 });
 </script>
 
@@ -59,7 +63,7 @@ onMount(async () => {
 
 {#each lists as { id, title, items }}
 <Panel id={id}>
-	<List title={title} items={items} home={HOME_ID} />
+	<List title={title} items={items} home={HOME_ID} on:change={onChange} />
 </Panel>
 {/each}
 

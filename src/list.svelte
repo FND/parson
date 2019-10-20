@@ -55,7 +55,7 @@ svg {
 	{#each items as { caption, done }}
 	<li>
 		<label>
-			<input type="checkbox" checked={!!done}>
+			<input type="checkbox" bind:checked={done} on:change>
 			<span>{caption}</span>
 		</label>
 	</li>
