@@ -1,0 +1,38 @@
+$layout-threshold: 40rem;
+
+main {
+	display: flex;
+	width: 100vw;
+	min-height: 100vh;
+	overflow-x: scroll;
+	scroll-behavior: smooth;
+	scroll-snap-type: x mandatory;
+	-webkit-overflow-scrolling: touch;
+}
+
+main > * {
+	min-height: 100%;
+	scroll-snap-align: start;
+
+	&:not(:first-of-type) {
+		flex: 0 0 100%;
+	}
+
+	&:first-of-type header { // XXX: special-casing
+		display: block;
+	}
+}
+
+@media(min-width: $layout-threshold) {
+	html {
+		@include striped(#333);
+		background-color: #EEE;
+	}
+
+	main {
+		max-width: $layout-threshold;
+		margin: 0 auto;
+		border: 1px solid #AAA;
+		border-width: 0 1px;
+	}
+}

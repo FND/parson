@@ -1,0 +1,12 @@
+ul.list {
+	@extend %list-bare;
+
+	li {
+		line-height: 2;
+	}
+
+	input:checked ~ * {
+		text-decoration: line-through;
+		color: #AAA;
+	}
+}

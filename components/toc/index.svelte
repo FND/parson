@@ -2,18 +2,7 @@
 export let entries;
 </script>
 
-<style>
-ul {
-	padding: 0;
-	list-style-type: none;
-}
-
-li:before {
-	content: "▸\0000a0";
-}
-</style>
-
-<ul>
+<ul class="toc">
 	{#each entries as { id, caption }}
 	<li>
 		<a href={`#${id}`}>{caption}</a>

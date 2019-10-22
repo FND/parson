@@ -1,10 +1,10 @@
 <script>
-import ToC from "./toc.svelte";
-import List from "./list.svelte";
-import Panel from "./panel.svelte";
-import Field from "./field.svelte";
-import Store from "./models/store";
-import httpRequest from "./util/http";
+import ToC from "../toc/index.svelte";
+import List from "../list/index.svelte";
+import Panel from "../panel/index.svelte";
+import Field from "../field/index.svelte";
+import Store from "../../src/models/store";
+import httpRequest from "../../src/util/http";
 import { onMount } from "svelte";
 
 let HOME_ID = "panel-about";

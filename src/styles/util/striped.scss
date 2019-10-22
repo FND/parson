@@ -1,0 +1,14 @@
+// cf. https://css-tricks.com/uniqlo-stripe-hovers
+@mixin striped($color: $brand-text-dark, $transparency: 0.04) {
+	background-image: linear-gradient(
+		135deg,
+		rgba($color, $transparency) 20%,
+		transparent 20%,
+		transparent 50%,
+		rgba($color, $transparency) 50%,
+		rgba($color, $transparency) 70%,
+		transparent 70%,
+		transparent
+	);
+	background-size: 20px 20px;
+}

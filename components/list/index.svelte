@@ -2,40 +2,6 @@
 export let title, items, home;
 </script>
 
-<style>
-header {
-	display: flex;
-}
-
-h2 {
-	flex-grow: 1;
-	font-size: 2em;
-}
-
-ul {
-	padding: 0;
-	list-style-type: none;
-}
-
-li label {
-	line-height: 2;
-}
-
-input:checked ~ * {
-	text-decoration: line-through;
-	color: #AAA;
-}
-
-svg {
-	height: 2em; /* corresponds to `h2` -- XXX: hacky? */
-	stroke: currentColor;
-	stroke-width: 3;
-	stroke-linecap: square;
-	stroke-linejoin: bevel;
-	fill: none;
-}
-</style>
-
 <header>
 	<h2>{title}</h2>
 	<ul>
@@ -51,7 +17,7 @@ svg {
 	</ul>
 </header>
 
-<ul>
+<ul class="list">
 	{#each items as { caption, done }}
 	<li>
 		<label>

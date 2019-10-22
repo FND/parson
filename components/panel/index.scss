@@ -1,0 +1,51 @@
+.panel {
+	$height: 2em;
+
+	border: 1px solid #82B366;
+	border-width: 0 1px;
+	padding: 1rem;
+	background-color: #D5E8D4;
+
+	&:nth-of-type(3n+1) {
+		border-color: #9673A6;
+		background-color: #E1D5E7;
+	}
+
+	&:nth-of-type(3n+2) {
+		border-color: #6C8EBF;
+		background-color: #DAE8FC;
+	}
+
+	&:first-of-type {
+		border: none;
+		background-color: #EEE;
+	}
+
+	header {
+		display: flex;
+		margin-bottom: 0.5em;
+
+		ul {
+			@extend %list-bare;
+		}
+
+		svg {
+			height: $height;
+			stroke: currentColor;
+			stroke-width: 3;
+			stroke-linecap: square;
+			stroke-linejoin: bevel;
+			fill: none;
+		}
+	}
+
+	h2 {
+		flex-grow: 1;
+		font-size: $height;
+	}
+
+	form > * {
+		display: block;
+		margin-bottom: 0.5em;
+	}
+}

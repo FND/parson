@@ -2,6 +2,6 @@
 export let id;
 </script>
 
-<article id={id}>
+<article class="panel" id={id}>
 	<slot />
 </article>

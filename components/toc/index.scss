@@ -1,0 +1,7 @@
+ul.toc {
+	@extend %list-bare;
+
+	li::before {
+		content: "▸\0000a0";
+	}
+}
