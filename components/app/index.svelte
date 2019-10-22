@@ -1,6 +1,6 @@
 <script>
 import ToC from "../toc/index.svelte";
-import List from "../list/index.svelte";
+import CheckList from "../checklist/index.svelte";
 import Panel from "../panel/index.svelte";
 import Field from "../field/index.svelte";
 import Store from "../../src/models/store";
@@ -62,13 +62,12 @@ onMount(async () => {
 </Panel>
 
 {#each lists as { id, title, items }}
-<Panel id={id}>
-	<List title={title} items={items} home={HOME_ID} on:change={onChange} />
+<Panel id={id} title={title} home={HOME_ID}>
+	<CheckList items={items} on:change={onChange} />
 </Panel>
 {/each}
 
-<Panel id={CONFIG.id}>
-	<h2>{CONFIG.title}</h2>
+<Panel id={CONFIG.id} title={CONFIG.title} home={HOME_ID}>
 	<form>
 		{#each ["title", "tagline"] as field}
 		<Field caption={field} value={metadata[field]} on:change={updater(field)} />
