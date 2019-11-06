@@ -2,13 +2,11 @@
 import Panel from "../panel/index.svelte";
 
 export let list, home;
-let items;
-
-$: items = list.items;
+let items = list.items;
 
 function onCreateItem(ev) {
 	list.addItem("--");
-	list = list;
+	items = list.items;
 }
 </script>
 

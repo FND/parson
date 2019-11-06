@@ -17,10 +17,18 @@ let metadata = {
 	tagline: "simple lists"
 };
 let lists = [];
-
 let notification = new Notification({ target: document.body }); // XXX: hacky
+let ref; // XXX: dummy node is hacky
 
-let init = async uri => {
+onMount(() => {
+	let container = ref.parentNode;
+	container.removeChild(ref);
+
+	let uri = container.getAttribute("data-url");
+	init(uri);
+});
+
+async function init(uri) {
 	try {
 		let res = await httpRequest("GET", uri, null, null, { strict: true });
 		res = await res.json();
@@ -47,7 +55,7 @@ function update(ev) { // NB: doubles as event handler
 	console.log("[STORE] updated", store, JSON.stringify(store));
 };
 
-let updater = field => {
+function updater(field) {
 	if(!(field in metadata)) {
 		throw new Error(`invalid field: \`${field}\``);
 	}
@@ -56,15 +64,6 @@ let updater = field => {
 		update();
 	};
 };
-
-let ref; // XXX: dummy node is hacky
-onMount(() => {
-	let container = ref.parentNode;
-	container.removeChild(ref);
-
-	let uri = container.getAttribute("data-url");
-	init(uri);
-});
 </script>
 
 <span bind:this={ref} hidden />
