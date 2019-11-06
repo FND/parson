@@ -2,3 +2,9 @@ label b {
 	font-weight: normal;
 	display: block;
 }
+
+label input[type=text] {
+	@extend %text-field;
+
+	width: 100%;
+}

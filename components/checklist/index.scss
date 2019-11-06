@@ -2,11 +2,28 @@ ul.checklist {
 	@extend %list-bare;
 
 	li {
+		display: flex;
 		line-height: 2;
 	}
 
 	input:checked ~ * {
 		text-decoration: line-through;
 		color: #AAA;
+	}
+
+	input[type=text] {
+		@extend %text-field;
+
+		flex-grow: 1;
+	}
+
+	button {
+		@extend %button-bare-control;
+	}
+
+	svg {
+		@extend %svg-icon;
+
+		height: 1.5em;
 	}
 }

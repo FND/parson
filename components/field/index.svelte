@@ -4,5 +4,5 @@ export let caption, value;
 
 <label>
 	<b>{caption}</b>
-	<input bind:value={value} on:change>
+	<input type="text" bind:value={value} on:change>
 </label>

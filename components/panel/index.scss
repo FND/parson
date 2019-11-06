@@ -48,13 +48,9 @@
 		}
 
 		svg {
-			display: block;
+			@extend %svg-icon;
+
 			height: $height;
-			stroke: currentColor;
-			stroke-width: 3;
-			stroke-linecap: square;
-			stroke-linejoin: bevel;
-			fill: none;
 		}
 	}
 

@@ -24,6 +24,10 @@ class List extends Record {
 		this._data.items.push(item);
 	}
 
+	removeItem(index) {
+		this._data.items.splice(index, 1);
+	}
+
 	get id() {
 		return `list-${idify(this.title)}`;
 	}
