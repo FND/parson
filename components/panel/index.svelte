@@ -10,6 +10,9 @@ export let home = null;
 		<h2>{title}</h2>
 		{#if home}
 		<ul>
+			<!-- XXX: custom controls depend on `home` check above  -->
+			<slot name="controls" />
+
 			<li>
 				<a href={`#${home}`}>
 					<!-- icon adapted from https://iconsvg.xyz -->

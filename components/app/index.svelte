@@ -43,7 +43,7 @@ let init = async uri => {
 	lists = store.lists;
 };
 
-let onChange = ev => {
+function update(ev) { // NB: doubles as event handler
 	console.log("[STORE] updated", store, JSON.stringify(store));
 };
 
@@ -53,7 +53,7 @@ let updater = field => {
 	}
 	return ev => {
 		store[field] = metadata[field] = ev.target.value; // XXX: redundancy smell
-		onChange(); // XXX: excessive reuse?
+		update();
 	};
 };
 
@@ -78,10 +78,8 @@ onMount(() => {
 		map(({ id, title }) => ({ id, caption: title }))} />
 </Panel>
 
-{#each lists as { id, title, items }}
-<Panel id={id} title={title} home={HOME_ID}>
-	<CheckList items={items} on:change={onChange} />
-</Panel>
+{#each lists as list}
+<CheckList list={list} home={HOME_ID} on:change={update} />
 {/each}
 
 <Panel id={CONFIG.id} title={CONFIG.title} home={HOME_ID}>

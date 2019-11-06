@@ -11,16 +11,10 @@
 		flex-grow: 1;
 	}
 
-	button { // TODO: reusable utility
-		border: 0;
-		background-color: transparent;
-		padding: 0;
-		font-weight: bold;
-		cursor: pointer; // XXX: controversial
+	button {
+		@extend %button-bare-control;
 
-		&:active {
-			transform: scale(0.99) translate(1px, 1px);
-		}
+		font-weight: bold;
 	}
 
 	&.is-error {

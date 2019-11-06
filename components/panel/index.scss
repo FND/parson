@@ -25,11 +25,30 @@
 		display: flex;
 		margin-bottom: 0.5em;
 
+		ul,
+		li {
+			@extend %list-bare;
+
+			display: flex;
+			align-items: center;
+		}
+
 		ul {
 			@extend %list-bare;
 		}
 
+		a {
+			@extend %interactive-control;
+
+			color: inherit;
+		}
+
+		button {
+			@extend %button-bare-control;
+		}
+
 		svg {
+			display: block;
 			height: $height;
 			stroke: currentColor;
 			stroke-width: 3;

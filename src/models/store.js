@@ -19,6 +19,11 @@ class List extends Record {
 		};
 	}
 
+	addItem(caption) {
+		let item = new Item({ caption });
+		this._data.items.push(item);
+	}
+
 	get id() {
 		return `list-${idify(this.title)}`;
 	}

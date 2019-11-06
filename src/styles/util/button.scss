@@ -1,0 +1,19 @@
+%interactive-control {
+	&:active {
+		transform: scale(0.99) translate(1px, 1px);
+	}
+}
+
+%button-bare {
+	@extend %interactive-control;
+
+	border: 0;
+	background-color: transparent;
+	padding: 0;
+}
+
+%button-bare-control {
+	@extend %button-bare;
+
+	cursor: pointer; // XXX: controversial
+}
