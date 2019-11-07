@@ -1,4 +1,5 @@
 import Record from "./record.js";
+import httpRequest from "../util/http";
 import { idify } from "../util";
 
 export default class Store extends Record {
@@ -8,6 +9,28 @@ export default class Store extends Record {
 			tagline: null,
 			lists: collection(List)
 		};
+	}
+
+	static async load(uri) {
+		let res = await httpRequest("GET", uri, null, null, { strict: true });
+		let etag = res.headers.get("ETag");
+		res = await res.json();
+		return new Store(res, uri, etag);
+	}
+
+	constructor(data, uri, etag) {
+		super(data);
+		this.unsafe = !etag;
+		this._origin = { uri, etag };
+	}
+
+	async save() {
+		let { uri, etag } = this._origin;
+		let headers = etag && {
+			"If-Match": etag
+		};
+		let payload = JSON.stringify(this);
+		await httpRequest("PUT", uri, headers, payload, { strict: true });
 	}
 }
 

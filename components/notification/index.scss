@@ -4,25 +4,38 @@
 	left: 0;
 	display: flex;
 	width: 100%;
+	justify-content: space-between;
 	padding: 1em;
 	text-align: center;
+	box-shadow: 0 -1px 0 rgba(#333, 0.12),
+			0 1px 3px rgba(#333, 0.12),
+			0 1px 3px rgba(#333, 0.24);
 
-	p {
+	> :not(button) {
 		flex-grow: 1;
 	}
 
-	button {
+	> button {
 		@extend %button-bare-control;
 
+		padding: 0 0.5em;
 		font-weight: bold;
+	}
+
+	.prompt p {
+		display: inline-block;
+		margin-right: 1em;
+	}
+
+	&.is-warning {
+		color: #856404;
+		border: 1px solid #FFEEBA;
+		background-color: #FFF3CD;
 	}
 
 	&.is-error {
 		color: #721C24;
 		border: 1px solid #F5C6CB;
 		background-color: #F8D7DA;
-		box-shadow: 0 -1px 0 rgba(#333, 0.12),
-				0 1px 3px rgba(#333, 0.12),
-				0 1px 3px rgba(#333, 0.24);
 	}
 }

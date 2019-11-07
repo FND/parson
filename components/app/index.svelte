@@ -5,7 +5,7 @@ import Panel from "../panel/index.svelte";
 import Notification from "../notification/index.svelte";
 import Field from "../field/index.svelte";
 import Store from "../../src/models/store";
-import httpRequest from "../../src/util/http";
+import debounce from "../../src/util/debounce";
 import { onMount } from "svelte";
 
 let HOME_ID = "panel-about";
@@ -20,6 +20,16 @@ let lists = [];
 let notification = new Notification({ target: document.body }); // XXX: hacky
 let ref; // XXX: dummy node is hacky
 
+let clobberingPrompt = {
+	message: "server does not support clobbering protection: existing changes might be overwritten",
+	prompt: {
+		caption: "continue",
+		action: () => save(true)
+	}
+};
+
+save = debounce(500, save);
+
 onMount(() => {
 	let container = ref.parentNode;
 	container.removeChild(ref);
@@ -28,13 +38,35 @@ onMount(() => {
 	init(uri);
 });
 
+async function save(force) { // NB: doubles as event handler
+	if(store.unsafe && force !== true) {
+		// TODO:
+		// * remember choice?
+		// * fall back to `HEAD` or `GET` request (⇒ race condition, but acceptable?)
+		notification.$set({
+			type: "warning",
+			confirmation: clobberingPrompt
+		});
+		return;
+	}
+
+	try {
+		await store.save();
+	} catch(err) {
+		// TODO: conflict resolution
+		notification.$set({
+			type: "error",
+			message: `failed to save: ${err}`
+		});
+		throw err;
+	}
+};
+
 async function init(uri) {
 	try {
-		let res = await httpRequest("GET", uri, null, null, { strict: true });
-		res = await res.json();
 		// NB: `store` access elsewhere is not prone to race condition because
 		//     without a store the application is effectively inert
-		store = new Store(res);
+		store = await Store.load(uri);
 	} catch(err) {
 		notification.$set({
 			type: "error",
@@ -51,17 +83,13 @@ async function init(uri) {
 	lists = store.lists;
 };
 
-function update(ev) { // NB: doubles as event handler
-	console.log("[STORE] updated", store, JSON.stringify(store));
-};
-
 function updater(field) {
 	if(!(field in metadata)) {
 		throw new Error(`invalid field: \`${field}\``);
 	}
 	return ev => {
 		store[field] = metadata[field] = ev.target.value; // XXX: redundancy smell
-		update();
+		save();
 	};
 };
 </script>
@@ -78,7 +106,7 @@ function updater(field) {
 </Panel>
 
 {#each lists as list}
-<CheckList list={list} home={HOME_ID} on:change={update} />
+<CheckList list={list} home={HOME_ID} on:change={save} />
 {/each}
 
 <Panel id={CONFIG.id} title={CONFIG.title} home={HOME_ID}>
