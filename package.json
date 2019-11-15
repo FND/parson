@@ -19,19 +19,19 @@
 		"test": "eslint --cache *.js src && echo ✓",
 		"compile": "npm-run-all --parallel compile:sass compile:js",
 		"compile:sass:auto": "npm run compile:sass -- --watch",
-		"compile:sass": "faucet",
+		"compile:sass": "faucet -c faucet.config.cjs",
 		"compile:js:auto": "npm run compile:js -- --watch",
 		"compile:js": "rollup -c"
 	},
 	"dependencies": {},
 	"devDependencies": {
 		"eslint-config-fnd": "^1.8.0",
-		"faucet-pipeline-sass": "^1.3.0",
+		"faucet-pipeline-sass": "^1.3.1",
 		"npm-run-all": "^4.1.5",
-		"rollup": "^1.26.3",
+		"rollup": "^1.27.14",
 		"rollup-plugin-node-resolve": "^5.2.0",
 		"rollup-plugin-svelte": "^5.1.1",
-		"rollup-plugin-terser": "^5.1.2",
-		"svelte": "^3.12.1"
+		"rollup-plugin-terser": "^5.1.3",
+		"svelte": "^3.16.7"
 	}
 }
