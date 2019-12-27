@@ -1,0 +1,229 @@
+@charset "UTF-8";
+ul.toc, ul.checklist, .panel header ul,
+.panel header li {
+  padding: 0;
+  list-style-type: none;
+}
+
+.panel header a:active, ul.checklist button:active, .panel header button:active, .notification > button:active {
+  transform: scale(0.99) translate(1px, 1px);
+}
+
+ul.checklist button, .panel header button, .notification > button {
+  border: 0;
+  background-color: transparent;
+  padding: 0;
+}
+
+ul.checklist button, .panel header button, .notification > button {
+  cursor: pointer;
+}
+
+ul.checklist input[type=text], label input[type=text] {
+  border: none;
+  padding: 0 0.2em;
+  background-color: #EEE;
+}
+
+ul.checklist svg, .panel header svg {
+  display: block;
+  stroke: currentColor;
+  stroke-width: 3;
+  stroke-linecap: square;
+  stroke-linejoin: bevel;
+  fill: none;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+body {
+  font-family: sans-serif;
+  line-height: 1.5;
+  scroll-behavior: smooth;
+}
+
+ul {
+  padding-left: 1em;
+}
+
+a {
+  text-decoration-skip-ink: auto;
+}
+
+[hidden] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+main {
+  display: flex;
+  width: 100vw;
+  min-height: 100vh;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+main > * {
+  min-height: 100%;
+  scroll-snap-align: start;
+}
+main > *:not(:first-of-type) {
+  flex: 0 0 100%;
+}
+main > *:first-of-type header {
+  display: block;
+}
+
+@media (min-width: 40rem) {
+  html {
+    background-image: linear-gradient(135deg, rgba(51, 51, 51, 0.04) 20%, transparent 20%, transparent 50%, rgba(51, 51, 51, 0.04) 50%, rgba(51, 51, 51, 0.04) 70%, transparent 70%, transparent);
+    background-size: 20px 20px;
+    background-color: #EEE;
+  }
+
+  main {
+    max-width: 40rem;
+    margin: 0 auto;
+    border: 1px solid #AAA;
+    border-width: 0 1px;
+  }
+}
+label b {
+  font-weight: normal;
+  display: block;
+}
+
+label input[type=text] {
+  width: 100%;
+}
+
+.notification {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 1em;
+  text-align: center;
+  box-shadow: 0 -1px 0 rgba(51, 51, 51, 0.12), 0 1px 3px rgba(51, 51, 51, 0.12), 0 1px 3px rgba(51, 51, 51, 0.24);
+}
+.notification > :not(button) {
+  flex-grow: 1;
+}
+.notification > button {
+  padding: 0 0.5em;
+  font-weight: bold;
+}
+.notification .prompt p {
+  display: inline-block;
+  margin-right: 1em;
+}
+.notification.is-warning {
+  color: #856404;
+  border: 1px solid #FFEEBA;
+  background-color: #FFF3CD;
+}
+.notification.is-error {
+  color: #721C24;
+  border: 1px solid #F5C6CB;
+  background-color: #F8D7DA;
+}
+
+.panel {
+  border: 1px solid #82B366;
+  border-width: 0 1px;
+  padding: 1rem;
+  background-color: #D5E8D4;
+}
+.panel:nth-of-type(3n+1) {
+  border-color: #9673A6;
+  background-color: #E1D5E7;
+}
+.panel:nth-of-type(3n+2) {
+  border-color: #6C8EBF;
+  background-color: #DAE8FC;
+}
+.panel:first-of-type {
+  border: none;
+  background-color: #EEE;
+}
+.panel header {
+  display: flex;
+  margin-bottom: 0.5em;
+}
+.panel header ul,
+.panel header li {
+  display: flex;
+  align-items: center;
+}
+.panel header a {
+  color: inherit;
+}
+.panel header svg {
+  height: 2em;
+}
+.panel h2 {
+  flex-grow: 1;
+  font-size: 2em;
+}
+.panel form > * {
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+ul.checklist li {
+  display: flex;
+  line-height: 2;
+}
+ul.checklist input:checked ~ * {
+  text-decoration: line-through;
+  color: #AAA;
+}
+ul.checklist input[type=text] {
+  flex-grow: 1;
+}
+ul.checklist svg {
+  height: 1.5em;
+}
+
+ul.toc li::before {
+  content: "▸ ";
+}
